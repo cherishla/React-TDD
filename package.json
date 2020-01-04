@@ -1,0 +1,26 @@
+{
+  "name": "react-tdd",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cherishla/React-TDD.git"
+  },
+  "keywords": [
+    "React",
+    "TTD"
+  ],
+  "author": "Lala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cherishla/React-TDD/issues"
+  },
+  "homepage": "https://github.com/cherishla/React-TDD#readme",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  }
+}
