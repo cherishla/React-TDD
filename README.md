@@ -23,8 +23,37 @@ npm install --save @babel/runtime
   "plugins": ["@babel/transform-runtime"]
 }
 ```
+6. 如果需要webpack
+```
+npm install --save-dev webpack webpack-cli babel-loader
+```
+**package.json**
+```js
+{
+    ...
+    "scripts": {
+        "build": "webpack"
+        "test": "jest --watch"
+    },
+  ...
+}
+```
+**create webpack.config.js**
+```js
+const path = require("path");
+const webpack = require("webpack");
 
-6. push git
+module.exports = {
+ mode: "development",
+ module: {
+   rules: [{
+     test: /\.(js|jsx)$/,
+     exclude: /node_modules/,
+     loader: 'babel-loader'}]}
+};
+```
+
+7. push git
 ```
 git init
 echo "node_modules" > .gitignore
@@ -32,17 +61,21 @@ git add .
 git commit -m ""
 ```
 
+
+
 ## First Test
 install: `npm install --save-dev jest`
 add `test` folder
 write first test
 ```js
 describe('Appointment', () => {
-    it('test name', () => {
+    it('test description', () => {
         expect(....)
     });
 });
 ```
+
+command : `npm test`
 
 ## Great Test
 
@@ -57,6 +90,16 @@ describe('Appointment', () => {
 *Independent of other tests*:不和其他測試相依，具獨立性
 *Has no side-effects*: 沒有副作用
 
+## ReactTestUtils
+React 透過合成事件(SyntheticEvent)進行跨瀏覽器溝通，使dom在不同瀏覽器做一樣的事情，所以無法透過JSDOM去觸發標準事件。
+
+```js
+import ReactTestUtils from 'react-dom/test-utils';
+```
+**Simulate**: 模擬事件，但不會自動提供相關的dom屬性，要自己新增。EX: Click、
+
+
+參考: 實用測試工具([Test Utilities](http://react.html.cn/docs/test-utils.html))
 
 ## 疑難雜症
 1. Abount document undefine: Jest 如果要自動產生document， 是由`jsdom` 所產生, Jest environment 預設是`jsdom`，如果要自己include html
@@ -68,6 +111,7 @@ describe('Appointment', () => {
 ```
 2. 注意變數可能會變髒: 每一次測試案例都將變數變為空，避免發生這種狀況
 
+3. 自動執行Test: `jest --watchAll`
 
 ## 語法
 1. 在執行test 之前，會做什麼事情，EX: create div
